@@ -12,11 +12,13 @@
   "dependencies": {
     "apollo-server-express": "^2.4.8",
     "axios": "^0.18.0",
+    "compression": "^1.7.4",
     "express": "^4.16.4",
     "graphql": "^14.2.0",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@types/compression": "^0.0.36",
     "@types/graphql": "^14.2.0",
     "@types/lodash": "^4.14.123",
     "nodemon": "^1.18.10",

@@ -1,7 +1,9 @@
 import http from 'http';
 import express from 'express';
+import compression from 'compression';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs, resolvers } from './schema';
+import { graphqlEventStream } from './schema-observer';
 
 const server = new ApolloServer({
   typeDefs,
@@ -19,7 +21,9 @@ const server = new ApolloServer({
   }
 });
 const app = express();
-server.applyMiddleware({ app });
+app.use(compression());
+app.use(graphqlEventStream());
+server.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
