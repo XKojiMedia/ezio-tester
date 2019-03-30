@@ -5,11 +5,14 @@ import * as GOTCharacter from './GOTCharacter';
 import * as GOTBook from './GOTBook';
 import * as GOTHouse from './GOTHouse';
 import * as HNUser from './HNUser';
+import * as Message from './Message';
 
 const rootTypeDef = gql`
   type Query {
     hello: String
   }
+  type Mutation
+  type Subscription
 `;
 const rootResolvers = {
   Query: {
@@ -23,6 +26,7 @@ export const typeDefs = [
   GOTBook.typeDef,
   GOTHouse.typeDef,
   HNUser.typeDef,
+  Message.typeDef,
 ];
 
 export const resolvers = merge(
@@ -31,4 +35,5 @@ export const resolvers = merge(
   GOTBook.resolvers,
   GOTHouse.resolvers,
   HNUser.resolvers,
+  Message.resolvers,
 );
