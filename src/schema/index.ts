@@ -6,6 +6,7 @@ import * as GOTBook from './GOTBook';
 import * as GOTHouse from './GOTHouse';
 import * as HNUser from './HNUser';
 import * as Message from './Message';
+import * as File from './File';
 
 const rootTypeDef = gql`
   type Query {
@@ -27,6 +28,7 @@ export const typeDefs = [
   GOTHouse.typeDef,
   HNUser.typeDef,
   Message.typeDef,
+  File.typeDef,
 ];
 
 export const resolvers = merge(
@@ -36,4 +38,5 @@ export const resolvers = merge(
   GOTHouse.resolvers,
   HNUser.resolvers,
   Message.resolvers,
+  File.resolvers,
 );
