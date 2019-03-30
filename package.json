@@ -1,0 +1,27 @@
+{
+  "name": "ezio-tester",
+  "version": "1.0.0",
+  "description": "GraphQL server for testing Altair",
+  "main": "index.js",
+  "author": "samuel@sirmuel.design",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/index.ts"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.4.8",
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "graphql": "^14.2.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.2.0",
+    "@types/lodash": "^4.14.123",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.4.1"
+  }
+}
