@@ -29,6 +29,9 @@ export const typeDef = gql`
     multipleUploads(files: [Upload!]!): [File]
   }
 
+  """
+  File **files** \`file?\`
+  """
   type File {
     filename: String!
     mimetype: String!

@@ -12,6 +12,15 @@ export const typeDef = gql`
       isAlive: Boolean
     ): [GOTCharacter]
   }
+
+  """
+  ID as MongoDB ObjectId
+  
+  ## Test Heading
+  **bold**
+  - list1
+  - list2
+  """
   type GOTCharacter {
     id: Int!
     url: String

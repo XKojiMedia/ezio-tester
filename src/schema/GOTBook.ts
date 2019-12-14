@@ -7,6 +7,17 @@ export const typeDef = gql`
       name: String
     ): [GOTBook]
   }
+
+  """
+  A Game of Thrones Book
+
+  ### Real books
+
+  - First item
+  - Second item
+  - Third item
+  - Fourth item
+  """
   type GOTBook {
     id: Int!
     url: String

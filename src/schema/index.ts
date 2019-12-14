@@ -11,6 +11,7 @@ import * as File from './File';
 const rootTypeDef = gql`
   type Query {
     hello: String
+    bye: Boolean
   }
   type Mutation
   type Subscription
@@ -18,6 +19,7 @@ const rootTypeDef = gql`
 const rootResolvers = {
   Query: {
     hello: () => 'Hello world',
+    bye: () => true,
   }
 };
 
