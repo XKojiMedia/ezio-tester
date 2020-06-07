@@ -1,9 +1,9 @@
 import http from 'http';
-import express from 'express';
-import compression from 'compression';
+import express, { RequestHandler } from 'express';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import { typeDefs, resolvers } from './schema';
 import { graphqlEventStream } from './schema-observer';
+const compression = require('compression');
 
 const server = new ApolloServer({
   typeDefs,
