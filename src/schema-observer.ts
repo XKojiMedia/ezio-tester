@@ -1,49 +1,45 @@
-import { Request, Response } from 'express';
+import { Express } from 'express';
+import { EventEmitter } from 'events';
 
-export const graphqlEventStream = ({ streamPath = '/stream' } = {}) => {
-  return (req: Request, res: Response) => {
-    const sse = (str = '') => {
-      res.write(str);
-      res.flushHeaders();
-    };
-    const cleanup = () => {
-      // tslint:disable-next-line
-      console.log('Cleaning up...');
+export const graphqlEventStream = ({
+  streamPath = '/stream',
+  emitter,
+  app,
+}: { app: Express, streamPath: string, emitter: EventEmitter }) => {
+  app.use((req, res) => {
+    res.setHeader('X-GraphQL-Event-Stream', streamPath);
+    if (req.next) {
+      req.next();
+    }
+  });
+
+  app.get(streamPath, (req, res) => {
+    if (req.headers.accept !== 'text/event-stream') {
+      res.statusCode = 405;
       res.end();
-    };
-
-    // If current request is for the stream, setup the stream.
-    if (req.path === streamPath) {
-      if (req.headers.accept !== 'text/event-stream') {
-        res.statusCode = 405;
-        res.end();
-        return;
-      }
-
-      // tslint:disable-next-line
-      console.log('stream requested.');
-      // Making sure these options are set.
-      req.socket.setTimeout(0);
-      req.socket.setNoDelay(true);
-      req.socket.setKeepAlive(true);
-
-      // Set headers for Server-Sent Events.
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/event-stream');
-      res.setHeader('Cache-Control', 'no-cache');
-      res.setHeader('Connection', 'keep-alive');
-
-      sse('event: open\n\n');
-
-      req.on('close', cleanup);
-      req.on('finish', cleanup);
-      req.on('error', cleanup);
       return;
     }
 
-    res.setHeader('X-GraphQL-Event-Stream', streamPath);
-    if (req.next) {
-      return req.next();
-    }
-  };
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.flushHeaders(); // flush the headers to establish SSE with client
+  
+    console.log('connected to client.');
+    let counter = 0;
+    const updateClients = () => {
+      counter++;
+      console.log('sending update to client..');
+      res.write(`data: ${JSON.stringify({num: counter})}\n\n`); // res.write() instead of res.send()
+    };
+    emitter.on('schema:updated', updateClients);
+  
+    // If client closes connection, stop sending events
+    res.on('close', () => {
+        console.log('client dropped me.');
+        emitter.off('schema:updated', updateClients);
+        res.end();
+    });
+  });
 };

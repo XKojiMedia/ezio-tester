@@ -2,8 +2,8 @@ import http from 'http';
 import express, { RequestHandler } from 'express';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import { typeDefs, resolvers } from './schema';
-import { graphqlEventStream } from './schema-observer';
 const compression = require('compression');
+const cors = require('cors');
 
 const server = new ApolloServer({
   typeDefs,
@@ -23,17 +23,19 @@ const server = new ApolloServer({
 });
 const app = express();
 app.use(compression());
+app.use(cors());
 app.use((req, res, next) => {
     // console.log(req.headers);
     return next();
 });
-app.use(graphqlEventStream());
+// app.use(graphqlEventStream());
+
 server.applyMiddleware({ app, path: '/graphql' });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 app.all('/test', (req, res) => {
     // console.log(req.headers);
-    res.send('Hi');
+    res.send('');
 });
 const PORT = process.env.__PORT__ || 5400;
 httpServer.listen(PORT, () => {

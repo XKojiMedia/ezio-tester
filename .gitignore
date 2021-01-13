@@ -1,5 +1,8 @@
 build
+dumps
 .vscode
+
+.DS_Store
 
 # Logs
 logs
