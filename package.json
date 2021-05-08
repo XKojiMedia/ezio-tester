@@ -19,7 +19,7 @@
     "express": "^4.17.1",
     "graphql": "^14.2.0",
     "graphql-tools": "^7.0.2",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/compression": "^1.7.0",
