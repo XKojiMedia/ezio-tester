@@ -1,13 +1,12 @@
-import { gql } from 'apollo-server-express';
-import { merge } from 'lodash';
+import { merge } from "lodash";
 
-import * as GOTCharacter from './GOTCharacter';
-import * as GOTBook from './GOTBook';
-import * as GOTHouse from './GOTHouse';
-import * as HNUser from './HNUser';
-import * as Message from './Message';
+import * as GOTCharacter from "./GOTCharacter";
+import * as GOTBook from "./GOTBook";
+import * as GOTHouse from "./GOTHouse";
+import * as HNUser from "./HNUser";
+import * as Message from "./Message";
 
-export const rootTypeDef = gql`
+export const rootTypeDef = `#graphql
   type Query {
     hello: String
     bye: Boolean
@@ -17,9 +16,9 @@ export const rootTypeDef = gql`
 `;
 export const rootResolvers = {
   Query: {
-    hello: () => 'Hello world',
+    hello: () => "Hello world",
     bye: () => true,
-  }
+  },
 };
 
 export const typeDefs = [
@@ -39,6 +38,6 @@ export const resolvers = merge(
   GOTBook.resolvers,
   GOTHouse.resolvers,
   HNUser.resolvers,
-  Message.resolvers,
+  Message.resolvers
   // File.resolvers,
 );

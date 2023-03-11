@@ -1,8 +1,6 @@
-import { gql } from 'apollo-server-express';
-
 const fileRepository = [];
 
-const fakePath = (filename = '') => `x/y/z/${filename}`;
+const fakePath = (filename = "") => `x/y/z/${filename}`;
 
 const processUpload = async (file: any) => {
   const { createReadStream, filename, mimetype, encoding } = await file;
@@ -12,14 +10,14 @@ const processUpload = async (file: any) => {
     filename,
     mimetype,
     encoding,
-    filepath: fakePath(filename)
+    filepath: fakePath(filename),
   };
 
   fileRepository.push(fileMetadata);
   return fileMetadata;
 };
 
-export const typeDef = gql`
+export const typeDef = `#graphql
   extend type Query {
     files: [File]
   }
@@ -47,6 +45,6 @@ export const resolvers = {
     },
     async multipleUploads(root: any, { files }: { files: any[] }) {
       return await Promise.all(files.map(processUpload));
-    }
-  }
+    },
+  },
 };

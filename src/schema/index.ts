@@ -1,26 +1,40 @@
-import { gql } from 'apollo-server-express';
-import { merge } from 'lodash';
+import { merge } from "lodash";
+// @ts-ignore
+import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
+import * as GOTCharacter from "./GOTCharacter";
+import * as GOTBook from "./GOTBook";
+import * as GOTHouse from "./GOTHouse";
+import * as HNUser from "./HNUser";
+import * as Message from "./Message";
+import * as File from "./File";
 
-import * as GOTCharacter from './GOTCharacter';
-import * as GOTBook from './GOTBook';
-import * as GOTHouse from './GOTHouse';
-import * as HNUser from './HNUser';
-import * as Message from './Message';
-import * as File from './File';
-
-const rootTypeDef = gql`
+const rootTypeDef = `#graphql
+  scalar Upload
   type Query {
     hello: String
     bye: Boolean
   }
   type Mutation
-  type Subscription
-`;
-const rootResolvers = {
-  Query: {
-    hello: () => 'Hello world',
-    bye: () => true,
+  type Subscription {
+    greetingsSSE: String
   }
+`;
+
+const rootResolvers = {
+  Upload: GraphQLUpload,
+  Query: {
+    hello: () => "Hello world",
+    bye: () => true,
+  },
+  Subscription: {
+    greetingsSSE: {
+      subscribe: async function* () {
+        for (const hi of ["Hi", "Bonjour", "Hola", "Ciao", "Zdravo"]) {
+          yield { greetings: hi };
+        }
+      },
+    },
+  },
 };
 
 export const typeDefs = [
@@ -40,5 +54,5 @@ export const resolvers = merge(
   GOTHouse.resolvers,
   HNUser.resolvers,
   Message.resolvers,
-  File.resolvers,
+  File.resolvers
 );

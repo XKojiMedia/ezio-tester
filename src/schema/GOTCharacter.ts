@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { gql } from 'apollo-server-express';
+import axios from "axios";
 
-export const typeDef = gql`
+export const typeDef = `#graphql
   extend type Query {
     GOTCharacters(
       name: String,
@@ -43,8 +42,11 @@ export const typeDef = gql`
 export const resolvers = {
   Query: {
     GOTCharacters: (root: any, args: any) =>
-      axios.get(`https://www.anapioficeandfire.com/api/characters`, { params: args })
-        .then(res => res.data)
+      axios
+        .get(`https://www.anapioficeandfire.com/api/characters`, {
+          params: args,
+        })
+        .then((res) => res.data),
   },
   GOTCharacter: {
     id(root: any) {
@@ -52,21 +54,21 @@ export const resolvers = {
     },
     father(root: any) {
       if (root.father) {
-        return axios.get(root.father).then(res => res.data);
+        return axios.get(root.father).then((res) => res.data);
       }
       return null;
     },
     mother(root: any) {
       if (root.mother) {
-        return axios.get(root.mother).then(res => res.data);
+        return axios.get(root.mother).then((res) => res.data);
       }
       return null;
     },
     spouse(root: any) {
       if (root.spouse) {
-        return axios.get(root.spouse).then(res => res.data);
+        return axios.get(root.spouse).then((res) => res.data);
       }
       return null;
     },
-  }
+  },
 };

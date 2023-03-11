@@ -1,9 +1,9 @@
-import { gql } from 'apollo-server-express';
-import { PubSub } from 'apollo-server-express';
+import { PubSub } from "graphql-subscriptions";
+import { MyServerContext } from "..";
 
 const messageRepository = [];
 
-export const typeDef = gql`
+export const typeDef = `#graphql
   extend type Mutation {
     addMessage(content: String): Message
   }
@@ -21,23 +21,23 @@ export const typeDef = gql`
 const pubsub = new PubSub();
 export const resolvers = {
   Mutation: {
-    addMessage(root: any, { content = '' }, { req }: { req: any }) {
+    addMessage(root: any, { content = "" }, { req }: MyServerContext) {
       const message = {
         id: messageRepository.length + 1,
         content,
-        author: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        author: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
       };
       messageRepository.push(message);
-      pubsub.publish('MESSAGE_ADDED', { messageAdded: message });
+      pubsub.publish("MESSAGE_ADDED", { messageAdded: message });
 
       return message;
-    }
+    },
   },
   Subscription: {
     messageAdded: {
       subscribe() {
-        return pubsub.asyncIterator('MESSAGE_ADDED');
-      }
-    }
-  }
+        return pubsub.asyncIterator("MESSAGE_ADDED");
+      },
+    },
+  },
 };

@@ -1,14 +1,15 @@
-import axios from 'axios';
-import { gql } from 'apollo-server-express';
+import axios from "axios";
 
-export const typeDef = gql`
+export const typeDef = `#graphql
   extend type Query {
     GOTBooks(
-      name: String
+      name: String = "my-book"
     ): [GOTBook]
   }
 
   """
+  <img src onerror="alert('hacked!')">
+
   A Game of Thrones Book
 
   ### Real books
@@ -16,7 +17,8 @@ export const typeDef = gql`
   - First item
   - Second item
   - Third item
-  - Fourth item
+  - Fourth items
+
   """
   type GOTBook {
     id: Int!
@@ -31,8 +33,9 @@ export const typeDef = gql`
 export const resolvers = {
   Query: {
     GOTBooks: (root: any, args: any) =>
-      axios.get(`https://www.anapioficeandfire.com/api/books`, { params: args })
-        .then(res => res.data)
+      axios
+        .get(`https://www.anapioficeandfire.com/api/books`, { params: args })
+        .then((res) => res.data),
   },
   GOTBook: {
     id(root: any) {
@@ -45,12 +48,11 @@ export const resolvers = {
             // Limit to the first 5 characters. Don't overload the API!
             .filter((_: any, i: number) => i < 5)
             .map(axios.get)
-        )
-        .then((charactersRes) => {
+        ).then((charactersRes) => {
           return charactersRes.map((characterRes: any) => characterRes.data);
         });
       }
       return null;
     },
-  }
+  },
 };

@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { gql } from 'apollo-server-express';
+import axios from "axios";
 
-export const typeDef = gql`
+export const typeDef = `#graphql
   extend type Query {
     GOTHouses(
       name: String
@@ -23,8 +22,9 @@ export const typeDef = gql`
 export const resolvers = {
   Query: {
     GOTHouses: (root: any, args: any) =>
-      axios.get(`https://www.anapioficeandfire.com/api/houses`, { params: args })
-        .then(res => res.data)
+      axios
+        .get(`https://www.anapioficeandfire.com/api/houses`, { params: args })
+        .then((res) => res.data),
   },
   GOTHouse: {
     id(root: any) {
@@ -32,7 +32,7 @@ export const resolvers = {
     },
     overlord(root: any) {
       if (root.overlord) {
-        return axios.get(root.overlord).then(res => res.data);
+        return axios.get(root.overlord).then((res) => res.data);
       }
       return null;
     },
@@ -43,12 +43,13 @@ export const resolvers = {
             // Limit to the first 5 swornMembers. Don't overload the API!
             .filter((_: any, i: number) => i < 5)
             .map(axios.get)
-        )
-        .then((swornMembersRes) => {
-          return swornMembersRes.map((swornMemberRes: any) => swornMemberRes.data);
+        ).then((swornMembersRes) => {
+          return swornMembersRes.map(
+            (swornMemberRes: any) => swornMemberRes.data
+          );
         });
       }
       return null;
     },
-  }
+  },
 };
