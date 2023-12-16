@@ -524,27 +524,9 @@ body-parser@1.20.1:
     type-is "~1.6.18"
     unpipe "1.0.0"
 
-body-parser@^1.20.0:
+body-parser@^1.20.0, body-parser@^1.20.2:
   version "1.20.2"
   resolved "https://registry.npmjs.org/body-parser/-/body-parser-1.20.2.tgz"
-  integrity sha512-ml9pReCu3M61kGlqoTm2umSXTlRTuGTx0bfYj+uIUKKYycG5NtSbeetV3faSU6R7ajOPw0g/J1PvK4qNy7s5bA==
-  dependencies:
-    bytes "3.1.2"
-    content-type "~1.0.5"
-    debug "2.6.9"
-    depd "2.0.0"
-    destroy "1.2.0"
-    http-errors "2.0.0"
-    iconv-lite "0.4.24"
-    on-finished "2.4.1"
-    qs "6.11.0"
-    raw-body "2.5.2"
-    type-is "~1.6.18"
-    unpipe "1.0.0"
-
-body-parser@^1.20.2:
-  version "1.20.2"
-  resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.2.tgz#6feb0e21c4724d06de7ff38da36dad4f57a747fd"
   integrity sha512-ml9pReCu3M61kGlqoTm2umSXTlRTuGTx0bfYj+uIUKKYycG5NtSbeetV3faSU6R7ajOPw0g/J1PvK4qNy7s5bA==
   dependencies:
     bytes "3.1.2"
@@ -978,10 +960,10 @@ glob-parent@~5.1.2:
   dependencies:
     is-glob "^4.0.1"
 
-graphql-sse@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/graphql-sse/-/graphql-sse-2.1.0.tgz"
-  integrity sha512-N1e/MqBzAAw27NZ8rsX3SBbgJ/gUBTOnkn9C1wiS7HpchQopPlURDjH3ROSuHqRePepD39itQi1Woy+gIjvz8w==
+graphql-sse@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/graphql-sse/-/graphql-sse-2.1.3.tgz#c58d02a035a9efb281cedcf93cb98f454d1e529c"
+  integrity sha512-NZ4bek4VBlsEDSCnibq9MddbZ2AU4rAusTwUg3sbux4J3WOcZ6zB6Ysrw6rzfJq771wEmwPEMtXPVbOYZnnFUw==
 
 graphql-subscriptions@^2.0.0:
   version "2.0.0"
@@ -1247,10 +1229,10 @@ node-fetch@^2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-nodemon@^2.0.21:
-  version "2.0.21"
-  resolved "https://registry.npmjs.org/nodemon/-/nodemon-2.0.21.tgz"
-  integrity sha512-djN/n2549DUtY33S7o1djRCd7dEm0kBnj9c7S9XVXqRUbuggN1MZH/Nqa+5RFQr63Fbefq37nFXAE9VU86yL1A==
+nodemon@^2.0.22:
+  version "2.0.22"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.22.tgz#182c45c3a78da486f673d6c1702e00728daf5258"
+  integrity sha512-B8YqaKMmyuCO7BowF1Z1/mkPqLk6cs/l63Ojtd6otKjMx47Dq1utxfRxcavH1I7VSaL8n5BUaoutadnsX3AAVQ==
   dependencies:
     chokidar "^3.5.2"
     debug "^3.2.7"
@@ -1581,7 +1563,7 @@ tr46@~0.0.3:
 
 ts-node@^10.9.1:
   version "10.9.1"
-  resolved "https://registry.npmjs.org/ts-node/-/ts-node-10.9.1.tgz"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.9.1.tgz#e73de9102958af9e1f0b168a6ff320e25adcff4b"
   integrity sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==
   dependencies:
     "@cspotcode/source-map-support" "^0.8.0"

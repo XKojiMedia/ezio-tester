@@ -10,9 +10,15 @@ import * as File from "./File";
 
 const rootTypeDef = `#graphql
   scalar Upload
+  enum Episode {
+    NEWHOPE
+    EMPIRE
+    JEDI @deprecated(reason: "We do not talk about this one")
+  }
   type Query {
     hello: String
-    bye: Boolean
+    bye: Boolean @deprecated(reason: "We do not say bye")
+    randomEpisode: Episode
   }
   type Mutation
   type Subscription {
@@ -25,6 +31,10 @@ const rootResolvers = {
   Query: {
     hello: () => "Hello world",
     bye: () => true,
+    randomEpisode: () => {
+      const episodes = ["NEWHOPE", "EMPIRE", "JEDI"];
+      return episodes[Math.floor(Math.random() * episodes.length)];
+    },
   },
   Subscription: {
     greetingsSSE: {

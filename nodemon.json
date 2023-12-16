@@ -1,9 +1,6 @@
 {
-  "watch": [ "src" ],
+  "watch": ["src"],
   "ext": "ts",
-  "ignore": [ "*.test.ts" ],
-  "delay": "3",
-  "execMap": {
-    "ts": "ts-node --esm --experimental-specifier-resolution=node"
-  }
+  "ignore": ["*.test.ts"],
+  "delay": "3"
 }

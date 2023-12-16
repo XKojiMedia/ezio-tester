@@ -2,6 +2,14 @@ import axios from "axios";
 
 export const typeDef = `#graphql
   extend type Query {
+    """
+    ## Test Heading
+    **bold**
+    - list1
+    - list2
+    
+    Fields description
+    """
     GOTCharacters(
       name: String,
       gender: String,
@@ -9,7 +17,7 @@ export const typeDef = `#graphql
       born: String,
       died: String,
       isAlive: Boolean
-    ): [GOTCharacter]
+    ): [GOTCharacter] @deprecated(reason: "Use GOTCharacter instead")
   }
 
   """

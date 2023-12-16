@@ -86,7 +86,7 @@ const main = async () => {
   const sseHandler = createHandler({
     schema: makeExecutableSchema({ typeDefs, resolvers }),
   });
-  app.all("/graphql/sse", sseHandler);
+  // app.all("/graphql/sse", sseHandler);
   const PORT = process.env.__PORT__ || 5400;
   httpServer.listen(PORT, () => {
     // tslint:disable-next-line
